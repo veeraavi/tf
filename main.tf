@@ -65,7 +65,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
    os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadOnly" # other possible values are "None", "ReadWrite"
-    disk_size_gb         = 20
+    # disk_size_gb         = 20   i got below error when i use this 
+    # "The specified disk size 20 GB is smaller than the size of the corresponding disk in the VM image: 30 GB. This is not allowed. Please choose equal or greater size or do not specify an explicit size." Target="osDisk.diskSizeGB"
   }
   source_image_reference {
     offer     = "0001-com-ubuntu-server-jammy"
