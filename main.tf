@@ -5,9 +5,9 @@ terraform {
       version = "3.85.0"
     }
   }
-  # backend "azurerm"{
+  backend "azurerm"{
 
-  # }
+  }
 }
 
 provider "azurerm" {
@@ -40,7 +40,7 @@ resource "azurerm_network_interface" "nic" {
 
   ip_configuration {
     name                          = "${var.vmname}-internal"
-    private_ip_address_allocation = "Static"
+    private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.sn.id
     public_ip_address_id          = resource.azurerm_public_ip.pip.id #We are mappin the public ip to the nic
     }
@@ -50,7 +50,7 @@ resource "azurerm_public_ip" "pip" {
   name                = "${var.vmname}-pip"
   location            = resource.azurerm_resource_group.rg.location
   resource_group_name = resource.azurerm_resource_group.rg.name
-  allocation_method   = "Static"
+  allocation_method   = "Dynamic"
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
